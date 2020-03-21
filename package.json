@@ -1,0 +1,14 @@
+{
+  "name": "notejson---note-manager",
+  "version": "1.0.0",
+  "description": "Note manager using JSON object",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafał Ciećwierz",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0"
+  }
+}
