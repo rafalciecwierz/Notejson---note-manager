@@ -9,3 +9,8 @@ ns.saveNotes({
 	title: "First note",
 	body: "This is the body of the first note",
 });
+
+const testNotes = ns.loadNotes();
+console.log("Notes: ");
+console.log("Title: " + testNotes.title);
+console.log("Body of the note: " + testNotes.body);

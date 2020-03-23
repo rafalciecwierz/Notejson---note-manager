@@ -9,7 +9,20 @@ const saveNotes = notes => {
 	fs.writeFileSync("./dependencies/notes.json", dataJSON);
 };
 
+const loadNotes = () => {
+	try {
+		return JSON.parse(
+			(dataBuffer = fs
+				.readFileSync("./dependencies/notes.json")
+				.toString())
+		);
+	} catch (e) {
+		return [];
+	}
+};
+
 module.exports = {
 	saveNotes,
+	loadNotes,
 	readLine,
 };
