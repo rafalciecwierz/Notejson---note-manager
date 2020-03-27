@@ -1,16 +1,70 @@
 const chalk = require("chalk");
-const ns = require("./dependencies/notes");
+const yargs = require("yargs");
+const notesSystem = require("./dependencies/notes");
 
-console.log(chalk.cyan.inverse("Hello! This is initial commit"));
-
-ns.readLine();
-
-ns.saveNotes({
-	title: "First note",
-	body: "This is the body of the first note",
+// Create Add command
+yargs.command({
+	command: "add",
+	describe: "Add a new note.",
+	builder: {
+		title: {
+			describe: "Note title",
+			demandOption: true,
+			type: "string",
+		},
+		body: {
+			describe: "Body text of the note.",
+			demandOption: true,
+			type: "string",
+		},
+	},
+	handler(argv) {
+		console.log(chalk.blueBright("Title.: ", argv.title));
+		console.log(chalk.blue("Body:\n", argv.body));
+		notesSystem.addNotes(argv.title, argv.body);
+	},
 });
 
-const testNotes = ns.loadNotes();
-console.log("Notes: ");
-console.log("Title: " + testNotes.title);
-console.log("Body of the note: " + testNotes.body);
+// Create REMOVE command
+yargs.command({
+	command: "remove",
+	describe: "Remove the note.",
+	builder: {
+		title: {
+			describe: "Note title to be removed",
+			demandOption: true,
+			type: "string",
+		},
+	},
+	handler(argv) {
+		notesSystem.removeNote(argv.title);
+	},
+});
+
+// Create LIST command
+yargs.command({
+	command: "list",
+	describe: "List all the notes.",
+	handler() {
+		notesSystem.listNotes();
+	},
+});
+
+// Create READ command
+yargs.command({
+	command: "read",
+	describe: "Read a single note.",
+	builder: {
+		title: {
+			describe: "Title to be found.",
+			demandOption: true,
+			type: "string",
+		},
+	},
+	handler(argv) {
+		notesSystem.readNote(argv.title);
+	},
+});
+
+// Using yargs argv
+yargs.parse();
