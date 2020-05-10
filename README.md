@@ -1,2 +1,3 @@
 # Notejson - note manager
- Note manager in Node.js  
+
+Note manager in Node.js
